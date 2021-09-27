@@ -1,10 +1,22 @@
 const { Schema, model } = require('mongoose');
 
 const recipeSchema = new Schema ({
-    name: [
+    authorName: [
         {
             type: String,
         },
     ],
-    content
-})
+    content : {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+    },
+    recipeName: {
+        type: String,
+    },
+    
+});
+
+module.exports = recipeSchema
