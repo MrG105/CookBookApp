@@ -5,7 +5,7 @@ const resolvers = {
         user: async() => {
             return User.find({});
         },
-        books: async(parent, {_id}) =>{
+        recipe: async(parent, {_id}) =>{
             const params = _id? {_id} : {};
             return Recipe.find(params);
         },
