@@ -15,16 +15,23 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Header />
+    <ApolloProvider client={client}> 
       <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          {/* <Route exact path="/signup" component={Signup} /> */}
-          <Route exact path="/addRecipe" component={RecipeForm} />
-          
-        </Switch>
+
+      {/* <Header /> */}
+      <div className="container">
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+ <Route exact path="/addRecipe">
+          <RecipeForm />
+        </Route>
+
+      </div>
+
       </Router>
       <Footer />
     </ApolloProvider>
