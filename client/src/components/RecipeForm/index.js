@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 
+// 
+// Recipe Model: authorName (string), content(string, required), image(not yet), recipeName(string)
+// TODO
+// add ingredients (array? seperate model?)
+// image upload: later
+// 
+
+
+
 function RecipeForm () {
-    const [name, setName] = useState('');
-    const [recipe, setRecipe] = useState('');
+    const [recipeName, setName] = useState('');
+    const [content, setContent] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [ingredients, setIngredients] = useState('');
 
 
     const handleInputChange = (e) => {
@@ -12,24 +22,27 @@ function RecipeForm () {
         const inputType = target.name;
         const inputValue = target.value;
 
-        if (inputType === 'name') {
+        if (inputType === 'recipeName') {
             setName(inputValue)
-        } else {
-            setRecipe(inputValue)
-        }
+        } else if (inputType === 'ingredients') {
+            setIngredients(inputValue)
+        } else
+            setContent(inputValue)
+    }
 
         
-    }
+    
 
     const handleFormSubmit = (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
-        if(!name) {
+        if(!recipeName) {
             setErrorMessage('Please Name Your Recipe')
             return;
         }
         setName('');
-        setRecipe('');
+        setIngredients('');
+        setContent('');
 
         
   };
@@ -41,21 +54,31 @@ function RecipeForm () {
           <div >
             <h1 className="margin-top text-center">New Recipe </h1>
             <hr className="mx-auto" />
-            <p className="text-center"> {name}</p>
+            <h3 className="text-center"> {recipeName}</h3>
             <form className="form col-lg-10 mx-auto text-center ">
             <input
-                value={name}
-                name="name"
+                value={recipeName}
+                name="recipeName"
                 onChange={handleInputChange}
                 type="text"
                 placeholder="What are we cookin?"
               />
+              <hr />
               <textarea
-                value={recipe}
+                value={ingredients}
+                name="ingredients"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="What are we usin?"
+                cols="50"
+                rows="20"
+              />
+              <textarea
+                value={content}
                 name="recipe"
                 onChange={handleInputChange}
                 type="text"
-                placeholder="How are we cookin?"
+                placeholder="How are we cookin it?"
                 cols="100"
                 rows="20"
               />

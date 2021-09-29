@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import RecipeForm from './components/RecipeForm';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -16,6 +17,7 @@ function App() {
   return (
     <ApolloProvider client={client}> 
       <Router>
+
       {/* <Header /> */}
       <div className="container">
         <Route exact path="/">
@@ -24,7 +26,12 @@ function App() {
         <Route exact path="/login">
           <Login />
         </Route>
+ <Route exact path="/addRecipe">
+          <RecipeForm />
+        </Route>
+
       </div>
+
       </Router>
       <Footer />
     </ApolloProvider>
