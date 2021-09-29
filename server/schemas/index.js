@@ -1,4 +1,4 @@
-const User = require('./User');
-const Recipe = require('./Recipe')
+const resolvers = require('./resolvers')
+const typedefs = require('./typeDefs')
 
-module.exports = { User, Recipe}
+module.exports = (resolvers, typedefs)
