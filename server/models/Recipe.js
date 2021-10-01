@@ -1,15 +1,14 @@
 const { Schema } = require('mongoose');
 
-const recipeSchema = new Schema ({
+const recipeSchema = new Schema({
     recipeId: {
         type: String,
         required: true,
-      },
-    author: [
-        {
-            type: String,
-        },
-    ],
+    },
+    author:
+    {
+        type: String,
+    },
     content: {
         type: String,
         required: true,
@@ -21,7 +20,7 @@ const recipeSchema = new Schema ({
         type: String,
         required: true,
     },
-    
+
 });
 
 module.exports = recipeSchema

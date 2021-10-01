@@ -30,7 +30,7 @@ mutation addRecipe($input: saveRecipe) {
         _id
         username
         email
-        recipes {
+        savedRecipes {
             recipeId
             author
             content
