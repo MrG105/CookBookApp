@@ -1,12 +1,16 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const recipeSchema = new Schema ({
-    authorName: [
+    recipeId: {
+        type: String,
+        required: true,
+      },
+    author: [
         {
             type: String,
         },
     ],
-    content : {
+    content: {
         type: String,
         required: true,
     },
@@ -15,6 +19,7 @@ const recipeSchema = new Schema ({
     },
     recipeName: {
         type: String,
+        required: true,
     },
     
 });
