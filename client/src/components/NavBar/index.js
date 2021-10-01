@@ -23,7 +23,7 @@ function NavBar() {
                 <Link to="/addRecipe">New Recipe</Link>
               </li>
               <li className="mx-2" onClick={logout}>
-                Logout
+                <Link to="/">Logout</Link>
               </li>
             </>
           ) : (
