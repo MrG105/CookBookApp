@@ -1,64 +1,50 @@
 import React, { useState } from 'react';
-
-// 
-// Recipe Model: authorName (string), content(string, required), image(not yet), recipeName(string)
-// TODO
-// add ingredients (array? seperate model?)
-// image upload: later
-// 
-
+import { useMutation } from '@apollo/client';
+import { ADD_RECIPE } from '../../utils/mutations';
 
 
 function RecipeForm () {
-    const [recipeName, setName] = useState('');
-    const [content, setContent] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [ingredients, setIngredients] = useState('');
+    const [recipeFormData, setUserFormData] = useState({ recipeId: '', author: '', content: '', image: '', recipeName: ''});
+    const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
 
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setUserFormData({ ...recipeFormData, [name]: value });
+    };
 
-    const handleInputChange = (e) => {
-        // Getting the value and name of the input which triggered the change
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
 
-        if (inputType === 'recipeName') {
-            setName(inputValue)
-        } else if (inputType === 'ingredients') {
-            setIngredients(inputValue)
-        } else
-            setContent(inputValue)
-    }
+      try {
+        const { data } = await saveRecipe({
+          variables: {...recipeFormData}
+        });
 
-        
-    
-
-    const handleFormSubmit = (e) => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
-        e.preventDefault();
-        if(!recipeName) {
-            setErrorMessage('Please Name Your Recipe')
-            return;
-        }
-        setName('');
-        setIngredients('');
-        setContent('');
-
-        
-  };
+        return data
+      } catch (err) {
+        console.log('error')
+      }
+      setUserFormData({
+        username: '',
+        email: '',
+        password: '',
+      });
+    }        
+  
 
   return (
+    <>
     <section>
       <div className="container my-auto">
         <div className="row">
           <div >
             <h1 className="margin-top text-center">New Recipe </h1>
             <hr className="mx-auto" />
-            <h3 className="text-center"> {recipeName}</h3>
+            <h3 className="text-center"> {recipeFormData.recipeName}</h3>
             <form className="form col-lg-10 mx-auto text-center ">
             <input
-                className="form-input"
-                value={recipeName}
+                value={recipeFormData.recipeName}
+
                 name="recipeName"
                 onChange={handleInputChange}
                 type="text"
@@ -66,8 +52,8 @@ function RecipeForm () {
               />
               <hr />
               <textarea
-                className="form-input-recipe"
-                value={ingredients}
+                value={recipeFormData.ingredients}
+
                 name="ingredients"
                 onChange={handleInputChange}
                 type="text"
@@ -76,8 +62,8 @@ function RecipeForm () {
                 rows="20"
               />
               <textarea
-                className="form-input-recipe"
-                value={content}
+                value={recipeFormData.content}
+
                 name="recipe"
                 onChange={handleInputChange}
                 type="text"
@@ -88,15 +74,12 @@ function RecipeForm () {
               <hr />
               <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
             </form>
-            {errorMessage && (
-              <div>
-                <p className="error-text">{errorMessage}</p>
-              </div>
-            )}
+            
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 }
 
