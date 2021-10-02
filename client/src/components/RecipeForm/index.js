@@ -107,7 +107,7 @@ function RecipeForm () {
                 cols="50"
                 rows="20"
 
-              />
+              />*/}
               <hr />
 
               <textarea
