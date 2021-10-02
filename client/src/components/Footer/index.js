@@ -16,6 +16,7 @@ function Footer() {
                         {icons.map(icon =>
                             (<a href={icon.link} key={icon.name} target="_blank" rel="noopener noreferrer"><i className={icon.name}></i></a>)
                             )}
+                        <p>Created By: Gabriel Gutierrez, Zion Flores, Alberto Canales, and Billy Dorman <i class="fa fa-copyright" aria-hidden="true"></i> 2021</p>
                     </div>
             </footer>
         

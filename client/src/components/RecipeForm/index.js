@@ -106,7 +106,10 @@ function RecipeForm () {
                 placeholder="What are we usin?"
                 cols="50"
                 rows="20"
-              /> */}
+
+              />
+              <hr />
+
               <textarea
                 value={recipeFormData.content}
                 className="form-input-recipe"
@@ -119,9 +122,10 @@ function RecipeForm () {
               />
               <hr />
               <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
+              <hr />
             </form>
-            <div className="image">
-              <h3> Upload Image</h3>
+            <div className="col-lg-10 text-center image">
+              <h3 className="text-center"> Upload Image</h3>
               <input type="file"
                 value={recipeFormData.image}
                 name="image"
