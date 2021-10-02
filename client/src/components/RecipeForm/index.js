@@ -4,48 +4,72 @@ import React, { useState } from 'react';
 // Recipe Model: authorName (string), content(string, required), image(not yet), recipeName(string)
 // TODO
 // add ingredients (array? seperate model?)
-// image upload: later
 // 
 
 
+function RecipeForm() {
+  const [recipeName, setName] = useState('');
+  const [content, setContent] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  // image hooks
+  const [image, setImage] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+  // upload image api call, might need to refactor into graphql style
+  const uploadImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'cookbookimages')
+    setLoading(true)
+    const res = await fetch(
+      '	https://api.cloudinary.com/v1_1/dtopu3von/image/upload',
+      {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json()
 
-function RecipeForm () {
-    const [recipeName, setName] = useState('');
-    const [content, setContent] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [ingredients, setIngredients] = useState('');
+    setImage(file.secure_url)
+    setLoading(false)
+  }
 
 
-    const handleInputChange = (e) => {
-        // Getting the value and name of the input which triggered the change
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
+  const handleInputChange = (e) => {
+    // Getting the value and name of the input which triggered the change
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
 
-        if (inputType === 'recipeName') {
-            setName(inputValue)
-        } else if (inputType === 'ingredients') {
-            setIngredients(inputValue)
-        } else
-            setContent(inputValue)
+    if (inputType === 'recipeName') {
+      setName(inputValue)
+    } else if (inputType === 'ingredients') {
+      setIngredients(inputValue)
+    } else
+      setContent(inputValue)
+  }
+
+
+
+
+  const handleFormSubmit = (e) => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    e.preventDefault();
+    if (!recipeName) {
+      setErrorMessage('Please Name Your Recipe')
+      return;
     }
+    setName('');
+    setIngredients('');
+    setContent('');
 
-        
-    
 
-    const handleFormSubmit = (e) => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
-        e.preventDefault();
-        if(!recipeName) {
-            setErrorMessage('Please Name Your Recipe')
-            return;
-        }
-        setName('');
-        setIngredients('');
-        setContent('');
-
-        
   };
+
+
+
 
   return (
     <section>
@@ -56,7 +80,7 @@ function RecipeForm () {
             <hr className="mx-auto" />
             <h3 className="text-center"> {recipeName}</h3>
             <form className="form col-lg-10 mx-auto text-center ">
-            <input
+              <input
                 value={recipeName}
                 name="recipeName"
                 onChange={handleInputChange}
@@ -90,6 +114,19 @@ function RecipeForm () {
                 <p className="error-text">{errorMessage}</p>
               </div>
             )}
+            <div className="image">
+              <h3> Upload Image</h3>
+              <input type="file"
+                name="file"
+                placeholder="Upload an Image"
+                onChange={uploadImage}
+              />
+              {loading ? (
+                <h3>Loading...</h3>
+              ) : (
+                <img src={image} style={{ width: '300px' }} />
+              )}
+            </div>
           </div>
         </div>
       </div>
