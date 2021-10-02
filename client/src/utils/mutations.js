@@ -31,7 +31,7 @@ mutation addRecipe($input: saveRecipe) {
         username
         email
         savedRecipes {
-            recipeId
+            _id
             author
             content
             image

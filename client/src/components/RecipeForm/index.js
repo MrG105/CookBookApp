@@ -13,7 +13,8 @@ import { ADD_RECIPE } from '../../utils/mutations';
 
 
 function RecipeForm () {
-    const [recipeFormData, setUserFormData] = useState({ recipeId: '', author: '', content: '', image: '', recipeName: ''});
+    const [recipeFormData, setUserFormData] = useState({ author: '', content: '', image: '', recipeName: ''});
+
     const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
     // image hooks
   const [image, setImage] = useState('');
@@ -34,16 +35,22 @@ function RecipeForm () {
       }
     )
     const file = await res.json()
-
+    console.log(file.url)
 
     setImage(file.secure_url)
     setLoading(false)
   }
-
+    
 
     const handleInputChange = (event) => {
+      if(event.target.name === 'image') {
+        uploadImage(event)
+      }
+      
       const { name, value } = event.target;
       setUserFormData({ ...recipeFormData, [name]: value });
+      
+      console.log(recipeFormData,'hello')
     };
 
     const handleFormSubmit = async (event) => {
@@ -57,20 +64,18 @@ function RecipeForm () {
         return data
       } catch (err) {
         console.log('error')
-      }
-      setUserFormData({
-        username: '',
-        email: '',
-        password: '',
-      });
-    }        
+        console.log(recipeFormData)
   
-
-
-
-
-
-
+      }
+    setUserFormData({
+      recipeId: '',
+      author: '',
+      content: '',
+      image: '',
+      recipeName: ''
+    });
+  }
+  
 
   return (
     <>
@@ -92,7 +97,7 @@ function RecipeForm () {
                 placeholder="What are we cookin?"
               />
               <hr />
-              <textarea
+              {/* <textarea
                 value={recipeFormData.ingredients}
                 className="form-input-recipe"
                 name="ingredients"
@@ -101,11 +106,11 @@ function RecipeForm () {
                 placeholder="What are we usin?"
                 cols="50"
                 rows="20"
-              />
+              /> */}
               <textarea
                 value={recipeFormData.content}
                 className="form-input-recipe"
-                name="recipe"
+                name="content"
                 onChange={handleInputChange}
                 type="text"
                 placeholder="How are we cookin it?"
@@ -118,9 +123,10 @@ function RecipeForm () {
             <div className="image">
               <h3> Upload Image</h3>
               <input type="file"
-                name="file"
+                value={recipeFormData.image}
+                name="image"
                 placeholder="Upload an Image"
-                onChange={uploadImage}
+                onChange={handleInputChange}
               />
               {loading ? (
                 <h3>Loading...</h3>
