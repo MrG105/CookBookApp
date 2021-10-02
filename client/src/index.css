@@ -99,6 +99,7 @@ p {
 
 a {
   color: var(--dark);
+  font-weight: 700;
   text-decoration: none;
   text-shadow: 0 0 3px #00fbff, 0 0 5px #0000FF;
 }
