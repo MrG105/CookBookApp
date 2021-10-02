@@ -44,7 +44,7 @@ function RecipeForm () {
             <form className="form col-lg-10 mx-auto text-center ">
             <input
                 value={recipeFormData.recipeName}
-
+                className="form-input"
                 name="recipeName"
                 onChange={handleInputChange}
                 type="text"
@@ -53,7 +53,7 @@ function RecipeForm () {
               <hr />
               <textarea
                 value={recipeFormData.ingredients}
-
+                className="form-input-recipe"
                 name="ingredients"
                 onChange={handleInputChange}
                 type="text"
@@ -63,7 +63,7 @@ function RecipeForm () {
               />
               <textarea
                 value={recipeFormData.content}
-
+                className="form-input-recipe"
                 name="recipe"
                 onChange={handleInputChange}
                 type="text"
