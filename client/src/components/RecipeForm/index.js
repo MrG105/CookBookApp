@@ -12,12 +12,10 @@ import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../../utils/mutations';
 
 
-function RecipeForm() {
-  const [recipeName, setName] = useState('');
-  const [content, setContent] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  // image hooks
+function RecipeForm () {
+    const [recipeFormData, setUserFormData] = useState({ recipeId: '', author: '', content: '', image: '', recipeName: ''});
+    const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
+    // image hooks
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -43,40 +41,6 @@ function RecipeForm() {
   }
 
 
-  const handleInputChange = (e) => {
-    // Getting the value and name of the input which triggered the change
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-    if (inputType === 'recipeName') {
-      setName(inputValue)
-    } else if (inputType === 'ingredients') {
-      setIngredients(inputValue)
-    } else
-      setContent(inputValue)
-  }
-
-
-
-
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    e.preventDefault();
-    if (!recipeName) {
-      setErrorMessage('Please Name Your Recipe')
-      return;
-    }
-    setName('');
-    setIngredients('');
-    setContent('');
-
-
-  };
-function RecipeForm () {
-    const [recipeFormData, setUserFormData] = useState({ recipeId: '', author: '', content: '', image: '', recipeName: ''});
-    const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
-
     const handleInputChange = (event) => {
       const { name, value } = event.target;
       setUserFormData({ ...recipeFormData, [name]: value });
@@ -101,6 +65,9 @@ function RecipeForm () {
       });
     }        
   
+
+
+
 
 
 
@@ -148,7 +115,6 @@ function RecipeForm () {
               <hr />
               <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
             </form>
-
             <div className="image">
               <h3> Upload Image</h3>
               <input type="file"
@@ -162,7 +128,6 @@ function RecipeForm () {
                 <img src={image} style={{ width: '300px' }} />
               )}
             </div>
-
           </div>
         </div>
       </div>
@@ -170,5 +135,6 @@ function RecipeForm () {
     </>
   );
 }};
+
 
 export default RecipeForm;
