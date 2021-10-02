@@ -134,7 +134,7 @@ function RecipeForm () {
     </section>
     </>
   );
-}};
+}
 
 
 export default RecipeForm;
