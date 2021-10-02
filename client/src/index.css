@@ -68,6 +68,7 @@ h1 {
   font-size: 4rem;
   font-weight: semi-bold;
   font-family: 'DM Serif Display', serif;
+  text-shadow: 0 0 3px #00fbff, 0 0 5px #0000FF;
 }
 
 h2 {
@@ -98,12 +99,15 @@ p {
 
 a {
   color: var(--dark);
+  font-weight: 700;
   text-decoration: none;
+  text-shadow: 0 0 3px #00fbff, 0 0 5px #0000FF;
 }
 
 a:visited {
   color: inherit;
 }
+
 
 nav {
   width: 100%;
@@ -118,7 +122,8 @@ nav a {
 
 nav a:hover {
   color: var(--secondary);
-  background-color: var(--dark);
+  background-color: #313160;
+  border-radius: 7%;
 }
 
 .page-title {
@@ -198,6 +203,7 @@ nav a:hover {
   font-size: 1.2rem;
   border: 2px solid var(--dark);
   border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .form-input-recipe {
   width: 100%;
@@ -207,6 +213,7 @@ nav a:hover {
   font-size: 1.2rem;
   border: 2px solid var(--dark);
   border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .form-input-title {
   width: 100%;
