@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 
+
 // 
 // Recipe Model: authorName (string), content(string, required), image(not yet), recipeName(string)
 // TODO
 // add ingredients (array? seperate model?)
 // 
+
+
+import { useMutation } from '@apollo/client';
+import { ADD_RECIPE } from '../../utils/mutations';
 
 
 function RecipeForm() {
@@ -31,6 +36,7 @@ function RecipeForm() {
       }
     )
     const file = await res.json()
+
 
     setImage(file.secure_url)
     setLoading(false)
@@ -67,21 +73,53 @@ function RecipeForm() {
 
 
   };
+function RecipeForm () {
+    const [recipeFormData, setUserFormData] = useState({ recipeId: '', author: '', content: '', image: '', recipeName: ''});
+    const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
+
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setUserFormData({ ...recipeFormData, [name]: value });
+    };
+
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
+
+      try {
+        const { data } = await saveRecipe({
+          variables: {...recipeFormData}
+        });
+
+        return data
+      } catch (err) {
+        console.log('error')
+      }
+      setUserFormData({
+        username: '',
+        email: '',
+        password: '',
+      });
+    }        
+  
 
 
 
 
   return (
+    <>
     <section>
       <div className="container my-auto">
         <div className="row">
           <div >
             <h1 className="margin-top text-center">New Recipe </h1>
             <hr className="mx-auto" />
-            <h3 className="text-center"> {recipeName}</h3>
+            <h3 className="text-center"> {recipeFormData.recipeName}</h3>
             <form className="form col-lg-10 mx-auto text-center ">
-              <input
-                value={recipeName}
+
+            <input
+                value={recipeFormData.recipeName}
+
+
                 name="recipeName"
                 onChange={handleInputChange}
                 type="text"
@@ -89,7 +127,8 @@ function RecipeForm() {
               />
               <hr />
               <textarea
-                value={ingredients}
+                value={recipeFormData.ingredients}
+
                 name="ingredients"
                 onChange={handleInputChange}
                 type="text"
@@ -98,7 +137,8 @@ function RecipeForm() {
                 rows="20"
               />
               <textarea
-                value={content}
+                value={recipeFormData.content}
+
                 name="recipe"
                 onChange={handleInputChange}
                 type="text"
@@ -109,11 +149,7 @@ function RecipeForm() {
               <hr />
               <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
             </form>
-            {errorMessage && (
-              <div>
-                <p className="error-text">{errorMessage}</p>
-              </div>
-            )}
+
             <div className="image">
               <h3> Upload Image</h3>
               <input type="file"
@@ -127,10 +163,12 @@ function RecipeForm() {
                 <img src={image} style={{ width: '300px' }} />
               )}
             </div>
+
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 }
 
