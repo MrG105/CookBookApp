@@ -1,36 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-const RecipeList = ({ recipes, title }) => {
-  if (!recipes.length) {
-    return <h3>No Recipes Yet!</h3>;
+import Auth from '../../utils/auth';
+
+import { QUERY_ME } from '../../utils/queries';
+
+import { useQuery, useMutation } from '@apollo/client';
+
+const RecipeList = ({ recipes,}) => {
+  if(!recipes.length) {
+    return <h3>No Thoughts Yet</h3>;
   }
 
-  return (
-    <div>
-      <h3>{title}</h3>
-      {recipes &&
-        recipes.map(recipe => (
-          <div key={recipe._id} className="card mb-3">
-            <p className="card-header">
-              <Link
-                to={`/profile/${recipe.username}`}
-                style={{ fontWeight: 700 }}
-                className="text-light"
-              >
-                {recipe.username}
-              </Link>{' '}
-            </p>
-            <div className="card-body">
-              <Link to={`/recipe/${recipe._id}`}>
-                <p>{recipe.recipeText}</p>
-              </Link>
-            </div>
-          </div>
-        ))}
-    </div>
-  );
-};
+  return(
+    <>
+    <Jumbotron fluid className='text-light bg-dark'>
+      <Container>
+        <h1>Viewing saved books!</h1>
+      </Container>
+    </Jumbotron>
+    <Container>
+      <h2>
+        {recipes.length
+          ? `Viewing ${recipes.length} saved ${recipes.length === 1 ? 'book' : 'books'}:`
+          : 'You have no saved books!'}
+      </h2>
+      <CardColumns>
+        {recipes.map((recipe) => {
+          return (
+            <Card>
+              {recipe.image ? <Card.Img src={recipe.image} alt={`The cover for ${recipe.recipeName}`} variant='top' /> : null}
+              <Card.Body>
+                <Card.Title></Card.Title>
+                <p className='small'>Authors: {recipe.author}</p>
+                <Card.Text></Card.Text>
+                
+              </Card.Body>
+            </Card>
+          );
+        })}
+      </CardColumns>
+    </Container>
+  </>
+  )
+}
 
 export default RecipeList;
 

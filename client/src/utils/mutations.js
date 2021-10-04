@@ -31,12 +31,20 @@ mutation addRecipe($input: saveRecipe) {
         username
         email
         savedRecipes {
-            _id
+            # _id
+            recipeId
             author
             content
             image
             recipeName
         }
     }
+}
+`
+export const REMOVE_RECIPE = gql` 
+mutation removeRecipe($recipeId: String!) {
+        removeBook(recipeId: $recipeId) {
+            _id
+        }
 }
 `
