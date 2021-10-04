@@ -15,7 +15,7 @@ const Profile = () => {
 <div class="row mt-4">
   <div class="col-md-6">
       <h2>{RecipeList}</h2>
-    <h3>Create a New Recipe:</h3>
+    <h3>Create a ipe:</h3>
 
     <form class="form new-project-form">
       <div class="form-group">
