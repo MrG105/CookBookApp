@@ -35,16 +35,20 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-    {
-        me {
-            _id
-            username
-            email
-            recipes {
-                _id
-                recipeText
-            }
+    query GET_ME    {
+        me{
+        _id
+        username
+        email
+        savedRecipes {
+            # _id
+            recipeId
+            author
+            content
+            image
+            recipeName
         }
+    }
     }
 `;
 

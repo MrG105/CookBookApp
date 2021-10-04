@@ -1,24 +1,24 @@
 const { Schema } = require('mongoose');
 
 const recipeSchema = new Schema({
-    // recipeId: {
-    //     type: String,
-    //     required: true,
-    // },
+    recipeId: {
+        type: String,
+        unique: true,
+    },
     author:
     {
         type: String,
     },
     content: {
         type: String,
-        required: true,
+        
     },
     image: {
         type: String,
     },
     recipeName: {
         type: String,
-        required: true,
+        
     },
 
 });

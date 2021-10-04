@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { QUERY_ME } from '../../utils/queries';
 
 // 
 // Recipe Model: authorName (string), content(string, required), image(not yet), recipeName(string)
@@ -8,18 +8,22 @@ import React, { useState } from 'react';
 // 
 
 
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_RECIPE } from '../../utils/mutations';
 
-
 function RecipeForm () {
-    const [recipeFormData, setUserFormData] = useState({ author: '', content: '', image: '', recipeName: ''});
+    // const randomRecipeId = JSON.stringify(Math.floor(Math.random() * 10000000));
+    
+    const [image, setImage] = useState('');
+    const { data } = useQuery(QUERY_ME);
+    const [recipeFormData, setUserFormData] = useState({ recipeId: "", author: 'data.me.username', content: '', image: image, recipeName: ''});
 
     const [saveRecipe, {error}] = useMutation(ADD_RECIPE)
     // image hooks
-  const [image, setImage] = useState('');
-  const [loading, setLoading] = useState(false);
   
+  const [loading, setLoading] = useState(false);
+ 
+
   // upload image api call, might need to refactor into graphql style
   const uploadImage = async e => {
     const files = e.target.files
@@ -35,19 +39,20 @@ function RecipeForm () {
       }
     )
     const file = await res.json()
-    console.log(file.url)
-
-    setImage(file.secure_url)
+    console.log(file)
+   
+    setImage(file.original_filename)
     setLoading(false)
   }
     
 
     const handleInputChange = (event) => {
       if(event.target.name === 'image') {
-        uploadImage(event)
+        uploadImage(event);
+        console.log(event.target)
       }
       
-      const { name, value } = event.target;
+      const { name, value} = event.target;
       setUserFormData({ ...recipeFormData, [name]: value });
       
       console.log(recipeFormData,'hello')
@@ -55,15 +60,20 @@ function RecipeForm () {
 
     const handleFormSubmit = async (event) => {
       event.preventDefault();
+      const randomRecipeId = Math.floor(Math.random() * 10000000);
+      console.log(randomRecipeId);
+      setUserFormData({recipeId: randomRecipeId});
+      console.log(recipeFormData);
+      
 
       try {
         const { data } = await saveRecipe({
-          variables: {...recipeFormData}
+          variables: {input: recipeFormData}
         });
-
+        console.log(data, "WORKED")
         return data
       } catch (err) {
-        console.log('error')
+        console.log('error', )
         console.log(recipeFormData)
   
       }
@@ -120,9 +130,7 @@ function RecipeForm () {
                 cols="100"
                 rows="20"
               />
-              <hr />
-              <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
-              <hr />
+              
             </form>
             <div className="col-lg-10 text-center image">
               <h3 className="text-center"> Upload Image</h3>
@@ -138,6 +146,9 @@ function RecipeForm () {
                 <img src={image} style={{ width: '300px' }} />
               )}
             </div>
+            <hr />
+              <button type="button" className="btn-primary" onClick={handleFormSubmit}>Submit</button>
+              <hr />
           </div>
         </div>
       </div>

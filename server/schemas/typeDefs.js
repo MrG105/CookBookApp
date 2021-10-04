@@ -9,7 +9,7 @@ const typeDefs = gql`
   }
 
   type Recipe {
-    _id: ID
+    recipeId: String
     author: String
     content: String
     image: String
@@ -17,7 +17,7 @@ const typeDefs = gql`
   }
 
   input saveRecipe {
-    _id: ID
+    recipeId: String
     author: String
     content: String
     image: String
@@ -41,6 +41,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addRecipe(input: saveRecipe): User
+    removeRecipe(recipeId: String!):User
   }
 `;
 
