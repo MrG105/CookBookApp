@@ -76,7 +76,7 @@ const resolvers = {
       console.log("args", args);
 
       return User.findOneAndUpdate(
-          { _id: args.input.recipeId},
+          { _id: context.user._id },
           {
               $push: {
                  savedRecipes: args.input

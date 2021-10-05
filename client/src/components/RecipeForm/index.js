@@ -61,7 +61,7 @@ function RecipeForm () {
     const handleFormSubmit = async (event) => {
       event.preventDefault();
       
-      console.log(recipeFormData);
+      console.log(recipeFormData, 'form data');
       
 
       try {
