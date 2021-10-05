@@ -5,7 +5,6 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.log(context.user)
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
@@ -71,11 +70,13 @@ const resolvers = {
     //   throw new AuthenticationError('You need to be logged in!');
     // },
     addRecipe: async (parent, args, context) => {
+
       args.input.author = context.user.username
       console.log(context.user);
       console.log("args", args);
+
       return User.findOneAndUpdate(
-          { _id: context.user._id},
+          { _id: args.input.recipeId},
           {
               $push: {
                  savedRecipes: args.input
@@ -87,6 +88,7 @@ const resolvers = {
           }
       );
   },
+
   removeRecipe: async (parent, args, context) => {
     console.log('context', context);
     console.log('args', args);
