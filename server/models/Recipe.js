@@ -1,10 +1,6 @@
 const { Schema } = require('mongoose');
 
-const recipeSchema = new Schema({
-    recipeId: {
-        type: String,
-        unique: true,
-    },
+const recipeSchema = new Schema({    
     author:
     {
         type: String,
