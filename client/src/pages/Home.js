@@ -8,6 +8,10 @@
 
 // export default Home;
 
+// TODO
+// Add useEffect to reload on delete
+// use React-bootstrap stuff maybe
+
 import React from "react";
 import RecipeList from "../components/RecipeList";
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
@@ -32,7 +36,7 @@ const Home = () => {
 
     try {
       const {data} = await removeRecipe({
-        variables: { recipeId },
+        variables: { recipeId: recipeId },
       });
 
     } catch(e) {
@@ -49,14 +53,14 @@ const Home = () => {
         <div className="flex-row justify-space-between mb-4 p-2">
           {recipes.map((recipe) => {
             return(
-            <div key={recipe.recipeId} border='dark' className="flex-row">
-           <div className="card">
+            <div key={recipe._id} border='dark' className="flex-row">
+           <div className="card"> 
              <div className="card-body">
               <h5 className="card-title">Recipe Name: {recipe.recipeName}</h5>
               <p className="card-text">How to make: {recipe.content}</p>
               <p className="card-text">Author: {recipe.author}</p>
               <img src={recipe.image} alt={recipe.image}></img>
-              <button className="btn bg-danger" onClick={() => handleDeleteRecipe(recipe.recipeId)}>Delete</button>
+              <button className="btn bg-danger" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
              </div>
              </div>
              </div>

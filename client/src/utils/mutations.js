@@ -31,8 +31,7 @@ mutation addRecipe($input: saveRecipe) {
         username
         email
         savedRecipes {
-            # _id
-            recipeId
+            _id
             author
             content
             image
@@ -43,7 +42,7 @@ mutation addRecipe($input: saveRecipe) {
 `
 export const REMOVE_RECIPE = gql` 
 mutation removeRecipe($recipeId: String!) {
-        removeBook(recipeId: $recipeId) {
+        removeRecipe(recipeId: $recipeId) {
             _id
         }
 }

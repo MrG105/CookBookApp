@@ -25,7 +25,7 @@ const resolvers = {
     },
     recipes: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Recipe.find(params).sort({ createdAt: -1 });
+      return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
     recipe: async (parent, { _id }) => {
       return Recipe.findOne({ _id });
@@ -71,8 +71,9 @@ const resolvers = {
     //   throw new AuthenticationError('You need to be logged in!');
     // },
     addRecipe: async (parent, args, context) => {
+      args.input.author = context.user.username
       console.log(context.user);
-      console.log( args);
+      console.log("args", args);
       return User.findOneAndUpdate(
           { _id: context.user._id},
           {
@@ -87,12 +88,13 @@ const resolvers = {
       );
   },
   removeRecipe: async (parent, args, context) => {
-    console.log(context);
-    console.log(args, context.user);
+    console.log('context', context);
+    console.log('args', args);
+    console.log('context user', context.user);
     return User.findOneAndUpdate(
     
-      {_id: '61596c822d38428d7123d5cb'},
-      {$pull: {savedRecipes: {recipeId: '321933'}}},
+      {_id: context.user._id},
+      {$pull: {savedRecipes: {_id: args.recipeId}}},
       {new: true}
     )
   }

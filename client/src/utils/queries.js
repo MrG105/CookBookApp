@@ -41,8 +41,7 @@ export const QUERY_ME = gql`
         username
         email
         savedRecipes {
-            # _id
-            recipeId
+            _id
             author
             content
             image
