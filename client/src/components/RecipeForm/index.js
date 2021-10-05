@@ -88,7 +88,7 @@ function RecipeForm () {
     <section>
       <div className="container my-auto">
         <div className="row">
-          <div >
+          <div className="text-center" >
             <h1 className="margin-top text-center">New Recipe </h1>
             <hr className="mx-auto" />
             <h3 className="text-center"> {recipeFormData.recipeName}</h3>
