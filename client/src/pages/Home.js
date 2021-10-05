@@ -24,6 +24,7 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const recipes = data?.me.savedRecipes || [];
   console.log(recipes);
+  console.log(data);
   const loggedIn = Auth.loggedIn();
   const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 

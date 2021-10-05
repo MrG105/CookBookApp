@@ -8,7 +8,7 @@ import { QUERY_ME } from '../../utils/queries';
 
 import { useQuery, useMutation } from '@apollo/client';
 
-const RecipeList = ({ recipes,}) => {
+const RecipeList = ({ recipes }) => {
   if(!recipes.length) {
     return <h3>No Thoughts Yet</h3>;
   }
