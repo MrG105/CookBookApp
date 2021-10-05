@@ -9,7 +9,7 @@ const typeDefs = gql`
   }
 
   type Recipe {
-    recipeId: String
+    _id: ID
     author: String
     content: String
     image: String
@@ -17,7 +17,6 @@ const typeDefs = gql`
   }
 
   input saveRecipe {
-    recipeId: String
     author: String
     content: String
     image: String
