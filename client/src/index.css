@@ -24,7 +24,7 @@ body {
 }
 
 body {
-  margin: 0;
+  margin-bottom: 125px;
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 400;
@@ -250,7 +250,7 @@ footer {
   background-color: #313160;
   color: white;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
   bottom: 0;
   display: flex;
   justify-content: center;
