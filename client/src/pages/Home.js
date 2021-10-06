@@ -48,20 +48,23 @@ const Home = () => {
     return <h1>loading</h1>
   }
   return (
-    <div>
-      <h2>Your Recipes</h2>
+    <div className="text-center">
+      <h1>Your Recipes</h1>
+      <hr />
       {recipes.length ? (
         <div className="flex-row justify-space-between mb-4 p-2">
           {recipes.map((recipe) => {
             return(
             <div key={recipe._id} border='dark' className="flex-row">
-           <div className="card"> 
+           <div className="card col-md-6"> 
              <div className="card-body">
-              <h5 className="card-title">Recipe Name: {recipe.recipeName}</h5>
-              <p className="card-text">How to make: {recipe.content}</p>
-              <p className="card-text">Author: {recipe.author}</p>
+              <h5 className="card-title text-uppercase fw-bold">Recipe Name: <br /> {recipe.recipeName}</h5>
+              <hr />
+              <p className="card-text">How to make: <br /> {recipe.content}</p>
+              <p className="card-text">Author: <br /> {recipe.author}</p>
               <img src={recipe.image} alt={recipe.image}></img>
-              <button className="btn bg-danger" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
+              <hr />
+              <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
              </div>
              </div>
              </div>
