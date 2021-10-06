@@ -1,6 +1,8 @@
-const { Schema } = require('mongoose');
+const mongoose = require("mongoose");
 
-const recipeSchema = new Schema({    
+const Schema = mongoose.Schema;
+
+const recipeSchema = new Schema({
     author:
     {
         type: String,
@@ -19,4 +21,6 @@ const recipeSchema = new Schema({
 
 });
 
-module.exports = recipeSchema
+const Recipe = mongoose.model('Recipe', recipeSchema);
+
+module.exports = Recipe

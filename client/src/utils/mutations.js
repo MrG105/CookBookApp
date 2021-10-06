@@ -42,6 +42,23 @@ mutation addRecipe($input: saveRecipe) {
     }
 }
 `
+export const EDIT_RECIPE = gql`
+mutation editRecipe($input: editRecipe) {
+    editRecipe(input: $input) {
+        _id
+        username
+        email
+        savedRecipes {
+            _id
+            author
+            content
+            image
+            recipeName
+        }
+    }
+}
+`
+
 export const REMOVE_RECIPE = gql` 
 mutation removeRecipe($recipeId: String!) {
         removeRecipe(recipeId: $recipeId) {
