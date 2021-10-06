@@ -99,9 +99,19 @@ const resolvers = {
       {$pull: {savedRecipes: {_id: args.recipeId}}},
       {new: true}
     )
+  },
+  
+  editRecipe: async (parent, args, context) => {
+    console.log('edit', parent, args, context)
+
+    return User.findOneAndUpdate(
+      { _id: "61596c822d38428d7123d5cb"},
+      {}
+    )
   }
   }
 };
+
 
 module.exports = resolvers;
 
