@@ -12,7 +12,7 @@
 // Add useEffect to reload on delete
 // use React-bootstrap stuff maybe
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RecipeList from "../components/RecipeList";
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from "../utils/auth";
@@ -28,13 +28,21 @@ const Home = () => {
   const loggedIn = Auth.loggedIn();
   const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 
+  // useEffect(() => {
+  //   if(recipes.length) {
+  // const recipes = data?.me.savedRecipes || [];
+  //   }
+  // });
+
   const handleDeleteRecipe = async (recipeId) => {
+  
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     // if(!token) {
     //   console.log("this")
     //   return false;
     // }
-
+    
     try {
       const {data} = await removeRecipe({
         variables: { recipeId: recipeId },

@@ -69,17 +69,17 @@ function RecipeForm () {
           variables: {input: recipeFormData}
         });
         console.log(data, "WORKED")
+        setUserFormData({     
+          content: '',
+          image: '',
+          recipeName: ''
+        });
         return data
       } catch (err) {
-        console.log('error', data )
+        console.log('error', )
         console.log(recipeFormData)
-  
       }
-    setUserFormData({     
-      content: '',
-      image: '',
-      recipeName: ''
-    });
+    
   }
   
 
