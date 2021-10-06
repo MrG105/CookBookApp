@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const recipeSchema = require('./Recipe')
 
 const userSchema = new Schema ({
         username: {
@@ -18,7 +17,12 @@ const userSchema = new Schema ({
           type: String,
           required: true,
         },
-        savedRecipes: [recipeSchema],
+        savedRecipes: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: "Recipe"
+          }
+        ],
     },
 )
 
