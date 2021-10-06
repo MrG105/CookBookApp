@@ -27,8 +27,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
-    recipe: async (parent, { _id }) => {
-      return Recipe.findOne({ _id });
+    recipe: async (parent, args, context) => {
+      return Recipe.findOne({ _id: });
     }
   },
 
