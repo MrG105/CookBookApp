@@ -24,21 +24,14 @@ mutation login($email: String!, $password: String!) {
 }
 `
 
-
-
 export const ADD_RECIPE = gql`
 mutation addRecipe($input: saveRecipe) {
     addRecipe(input: $input) {
         _id
-        username
-        email
-        savedRecipes {
-            _id
-            author
-            content
-            image
-            recipeName
-        }
+        author
+        content
+        image
+        recipeName
     }
 }
 `

@@ -7,7 +7,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
+        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').execPopulate().Recipe
           .select('-__v -password')
 
         return userData;
@@ -55,40 +55,46 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // addRecipe: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const recipe = await Recipe.create({ ...args, username: context.user.username });
-
-    //     await User.findByIdAndUpdate(
-    //       { _id: context.user._id },
-    //       { $push: { recipe: recipe._id } },
-    //       { new: true }
-    //     );
-
-    //     return recipe;
-    //   }
-
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
     addRecipe: async (parent, args, context) => {
+      console.log('args', args)
+      console.log('contxet', context.user)
+    
+          args.input.author = context.user.username          
+          const recipe = await Recipe.create({ 
+            ...args.input,
+          });
 
-      // args.input.author = context.user.username
-      console.log(context.user);
-      console.log("args", args);
+          return await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { savedRecipes: recipe._id } },
+            { new: true }
+          );
+             
+      // throw new AuthenticationError('You need to be logged in!');
+    },
 
-      return User.findOneAndUpdate(
-          { _id: ObjectId("61596c822d38428d7123d5cb") },
-          {
-              $push: {
-                 savedRecipes: args.input
-              }
-          },
-          {
-              new: true,
-              runValidators: true,
-          }
-      );
-  },
+    // addRecipe: async (parent, args, context) => {
+
+    //   args.input.author = context.user.username
+    //   console.log(context.user);
+    //   console.log("args", args);
+
+
+    //   return User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       {
+    //           $push: {
+    //              savedRecipes: args.input
+    //           }
+    //       },
+    //       {
+    //           new: true,
+    //           runValidators: true,
+    //       }
+    //   );
+     
+  
+
 
   removeRecipe: async (parent, args, context) => {
     console.log('context', context);

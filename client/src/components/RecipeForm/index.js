@@ -21,7 +21,7 @@ function RecipeForm () {
   const [loading, setLoading] = useState(false);
  
   useEffect(() => {
-    console.log('recipeFormData3', recipeFormData)
+    // console.log('recipeFormData3', recipeFormData)
   }, [recipeFormData])
 
   // upload image api call, might need to refactor into graphql style
@@ -54,7 +54,7 @@ function RecipeForm () {
         const { name, value} = event.target;
         setUserFormData({ ...recipeFormData, [name]: value });
         
-        console.log(recipeFormData,'hello')
+        // console.log(recipeFormData,'hello')
       }
     };
 
