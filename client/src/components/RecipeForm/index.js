@@ -71,7 +71,7 @@ function RecipeForm () {
         console.log(data, "WORKED")
         return data
       } catch (err) {
-        console.log('error', )
+        console.log('error', data )
         console.log(recipeFormData)
   
       }
