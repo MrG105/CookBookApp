@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Recipe } = require('../models');
 const { signToken } = require('../utils/auth');
+const {ObjectId} = require('mongojs');
 
 const resolvers = {
   Query: {
@@ -26,8 +27,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
-    recipe: async (parent, { _id }) => {
-      return Recipe.findOne({ _id });
+    recipe: async (parent, args, context) => {
+      return Recipe.findOne({ _id: });
     }
   },
 
@@ -71,12 +72,12 @@ const resolvers = {
     // },
     addRecipe: async (parent, args, context) => {
 
-      args.input.author = context.user.username
+      // args.input.author = context.user.username
       console.log(context.user);
       console.log("args", args);
 
       return User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: ObjectId("61596c822d38428d7123d5cb") },
           {
               $push: {
                  savedRecipes: args.input
@@ -102,12 +103,13 @@ const resolvers = {
   },
   
   editRecipe: async (parent, args, context) => {
-    console.log('edit', parent, args, context)
+    console.log('edit', args, context.user)
 
-    return User.findOneAndUpdate(
-      { _id: "61596c822d38428d7123d5cb"},
-      {}
-    )
+    return await User.findOneAndUpdate(
+      {_id: ObjectId("61596c822d38428d7123d5cb")}, 
+      {$pull: {savedRecipes: {_id: args.recipeId}}},
+      {new: true}
+      )
   }
   }
 };
