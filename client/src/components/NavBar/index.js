@@ -14,13 +14,13 @@ function NavBar() {
           {Auth.loggedIn() ? (
             <>
               <li className="mx-2">
-                <Link to="/">Home</Link>
+                <Link to="/">My Recipes</Link>
               </li>
               <li className="mx-2">
-                <Link to="/recipeList">Recipe List</Link>
+                <Link to="/recipeList">Recipe Search</Link>
               </li>
               <li className="mx-2">
-                <Link to="/addRecipe">New Recipe</Link>
+                <Link to="/addRecipe">Create New Recipe</Link>
               </li>
               <li className="mx-2" onClick={logout}>
                 <Link to="/">Logout</Link>

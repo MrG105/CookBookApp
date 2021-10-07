@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
 
-const editRecipe = () => {
+// const editRecipe = () => {
 
-    const [recipeData, setRecipeData] = useState({  content: "", image: 'String', recipeName: 'String'})
+//     const [recipeData, setRecipeData] = useState({  content: "", image: 'String', recipeName: 'String'})
 
-}
+// }
 
-export default editRecipe;
+// export default editRecipe;
