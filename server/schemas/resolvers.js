@@ -3,6 +3,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Recipe } = require('../models');
 const { signToken } = require('../utils/auth');
 const {ObjectId} = require('mongojs');
+const mongoose = require('mongoose')
 
 const resolvers = {
   Query: {
@@ -111,15 +112,17 @@ const resolvers = {
   //   )
   // },
   removeRecipe: async (parent, args, context) => {
+    const { recipeId } = args
     const recipe = await Recipe.findOneAndDelete({
-      _id: args.recipeId,
+      _id: recipeId,
       author: context.user.username,
     });
-    console.log('removerecipe', recipe)
+
+    const recipeIdObject = ObjectId(recipeId)
 
     return await User.findOneAndUpdate(
       {_id: context.user._id},
-      { $pull: { savedRecipes: {_id: ObjectId(args.RecipeId)}}}
+      { $pull: { savedRecipes: recipeIdObject}}
     );
   },
   
