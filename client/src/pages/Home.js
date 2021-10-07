@@ -48,7 +48,7 @@ const Home = () => {
       const {data} = await removeRecipe({
         variables: { recipeId: recipeId },
       });
-
+      window.location.assign('/');
     } catch(e) {
       console.log(e);
     }

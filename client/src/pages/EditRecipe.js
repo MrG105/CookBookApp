@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME, QUERY_RECIPE } from "../utils/queries";
 import { Link, useParams } from 'react-router-dom';
 import { EDIT_RECIPE } from "../utils/mutations";
+import Home from "./Home";
 
 const EditRecipe = () => {
 
@@ -37,12 +38,15 @@ const EditRecipe = () => {
             image: '',
             recipeName: ''
           });
+          window.location.assign('/');
           return data
         } catch (err) {
           console.log('error', )
           console.log(setRecipeData)
         }
-      
+      if (loading) {
+          return <h2>Loading...</h2>
+      }
     }
     return (
         <>

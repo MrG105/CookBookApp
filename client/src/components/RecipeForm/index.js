@@ -74,6 +74,7 @@ function RecipeForm () {
           image: '',
           recipeName: ''
         });
+        window.location.assign('/');
         return data
       } catch (err) {
         console.log('error', )
