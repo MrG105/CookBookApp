@@ -28,11 +28,11 @@ const Home = () => {
   const loggedIn = Auth.loggedIn();
   const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 
-  // useEffect(() => {
-  //   if(recipes.length) {
-  // const recipes = data?.me.savedRecipes || [];
-  //   }
-  // });
+  useEffect(() => {
+    if(recipes.length) {
+      const recipes = data?.me.savedRecipes || [];
+    }
+  }, [recipes]);
 
   const handleDeleteRecipe = async (recipeId) => {
   
