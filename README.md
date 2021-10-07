@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# CookBookApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![License](https://img.shields.io/static/v1?label=license&message=MIT&color=brightgreen) 
 
-## Available Scripts
+  
+  
+## Table of Contents
+  
+* [Installation](#Installation)
+  
+* [Usage](#Usage)
+  
+* [Contributors](#Contributors)
+  
+* [Tests](#Tests)
+  
+* [License](#License)
+  
+* [Authors](#Author)
 
-In the project directory, you can run:
+* [ScreenShot](*Screenshot)
 
-### `npm start`
+* [Heroku-Deployed](#Heroku-deployed)
+  
+## Installation
+  
+* None, go to deployed application.
+  
+## Usage
+  
+*  CookBookApp is an interactive application that utilizes Create-React-App and Apollo-GraphQL to construct a simple and powerful cook book application.  The user is able to signup under a unique (password encrypted) username and email which gives them access to create, add, and develop a quick and easy database to reference all their favorite recipes.  Users can explore all the recipes in the database and add them to their personal recipe page. 
+  
+## Contributing
+  
+*  If you want to contribute to this project, please submit a pull request or create a new issue. 
+[here](https://github.com/AlbertoCanales1/CookBookApp/issues)
+  
+## Tests
+  
+*  N/A
+  
+## License
+  
+*  This project is licensed under the MIT License - see the [License](https://choosealicense.com/licenses/mit/) page.
+  
+## Authors
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Zion Flores](https://github.com/Zi-on)
+* Zion Flores is a Web Developer who is looking to learn anything & everything coding/programming related. He is a certified Full-Stack Web Developer from the UTSA program. He has found himself prevailing in back end functionality & Javascript.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Gabriel Gutierrez](https://github.com/MrG105) 
+* Gabriel Gutierrez is 33 year old aspiring coder with a wealth of knowledge and world experience. Graduated from UTSA With a B.A. in Interdisciplinary Studies and a Certificate from the UTSA Full-Stack Web Development program.
 
-### `npm test`
+[Billy Dorman](https://github.com/ChainRxn12)
+* Billy Dorman is a Web Developer with a keen eye for creating visually appealing and user friendly applications.  After receiving a Certificate in Full-Stack Web Development from UTSA Bootcamp, he's enjoyed working on the Front-End of applications--specifically with CSS and bringing the page to life with React and JavaScript functionality.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Alberto Canales](https://github.com/AlbertoCanales1)
+* Alberto Canales is a promising full-stack developer with exceptional attention to detail.  He has a Certificate from the UTSA Full-Stack Web Development program.
 
-### `npm run build`
+## Screenshot
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Heroku-Deployed
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- [book.search](https://sheltered-stream-88414.herokuapp.com/) -->
