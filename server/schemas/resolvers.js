@@ -1,4 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
+// const { default: context } = require('react-bootstrap/esm/AccordionContext');
 const { User, Recipe } = require('../models');
 const { signToken } = require('../utils/auth');
 const {ObjectId} = require('mongojs');
@@ -7,8 +8,8 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').execPopulate().Recipe
-          .select('-__v -password')
+        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').select('-__v -password')
+
 
         return userData;
       }
@@ -27,8 +28,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
-    recipe: async (parent, args, context) => {
-      return Recipe.findOne({ _id: });
+    recipe: async (parent, { _id }) => {
+      return Recipe.findOne({ _id: context.recipe._id });
     }
   },
 
