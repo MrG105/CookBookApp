@@ -11,13 +11,15 @@ query recipes($username: String) {
 `;
 
 export const QUERY_RECIPE = gql`
-  query recipe($id: ID!) {
-    recipe(_id: $id) {
-      _id
-      recipeText
-      username
-    }
-  }
+ query QUERY_RECIPE {
+     recipe {
+        _id
+        author
+        content
+        image
+        recipeName
+     }
+ }
 `;
 
 export const QUERY_USER = gql`

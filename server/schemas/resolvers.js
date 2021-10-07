@@ -29,8 +29,8 @@ const resolvers = {
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
     recipe: async (parent, args, context) => {
-
-      return Recipe.findOne({ _id: context.recipe._id });
+      console.log('recipes:', args, context);
+      return Recipe.findOne({_id: ObjectId("615e42661da1df926c1b2e29") });
     }
   },
 
@@ -114,9 +114,9 @@ const resolvers = {
   editRecipe: async (parent, args, context) => {
     console.log('edit', args, context.user)
 
-    return await User.findOneAndUpdate(
+    return await Recipe.findOneAndUpdate(
       {_id: ObjectId("61596c822d38428d7123d5cb")}, 
-      {$pull: {savedRecipes: {_id: args.recipeId}}},
+      {$pull: {id: args.recipeId}},
       {new: true}
       )
   }
