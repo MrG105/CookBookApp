@@ -28,7 +28,7 @@ const resolvers = {
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
     recipe: async (parent, args, context) => {
-      return Recipe.findOne({ _id: });
+      return Recipe.findOne({ _id: context.recipe._id });
     }
   },
 
@@ -59,17 +59,18 @@ const resolvers = {
       console.log('args', args)
       console.log('contxet', context.user)
     
-          args.input.author = context.user.username          
-          const recipe = await Recipe.create({ 
-            ...args.input,
-          });
+          // args.input.author = context.user.username          
+          const recipe = await Recipe.create({
+            ...args.input
+          }
+          );
 
-          return await User.findByIdAndUpdate(
+          await User.findByIdAndUpdate(
             { _id: context.user._id },
-            { $push: { savedRecipes: recipe._id } },
+            { $push: { savedRecipes: recipe } },
             { new: true }
           );
-             
+          return recipe
       // throw new AuthenticationError('You need to be logged in!');
     },
 

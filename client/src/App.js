@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import SingleRecipe from "./pages/SingleRecipe";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RecipeForm from "./components/RecipeForm";
@@ -49,7 +50,9 @@ function App() {
           <Route exact path="/addRecipe">
             <RecipeForm />
           </Route>
-    
+          <Route exact path="/editRecipe">
+            <SingleRecipe />
+          </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
