@@ -59,7 +59,7 @@ const resolvers = {
     },
     addRecipe: async (parent, args, context) => {
       console.log('args', args)
-      console.log('contxet', context.user)
+      console.log('context', context.user)
     
           // args.input.author = context.user.username          
           const recipe = await Recipe.create({
@@ -99,16 +99,28 @@ const resolvers = {
   
 
 
-  removeRecipe: async (parent, args, context) => {
-    console.log('context', context);
-    console.log('args', args);
-    console.log('context user', context.user);
-    return User.findOneAndUpdate(
+  // removeRecipe: async (parent, args, context) => {
+  //   console.log('context', context);
+  //   console.log('args', args);
+  //   console.log('context user', context.user);
+  //   return User.findOneAndUpdate(
     
+  //     {_id: context.user._id},
+  //     {$pull: {savedRecipes: {_id: args.recipeId}}},
+  //     {new: true}
+  //   )
+  // },
+  removeRecipe: async (parent, args, context) => {
+    const recipe = await Recipe.findOneAndDelete({
+      _id: args.recipeId,
+      author: context.user.username,
+    });
+    console.log('removerecipe', recipe)
+
+    return await User.findOneAndUpdate(
       {_id: context.user._id},
-      {$pull: {savedRecipes: {_id: args.recipeId}}},
-      {new: true}
-    )
+      { $pull: { savedRecipes: {_id: ObjectId(args.RecipeId)}}}
+    );
   },
   
   editRecipe: async (parent, args, context) => {
