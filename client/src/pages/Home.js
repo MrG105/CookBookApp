@@ -73,6 +73,7 @@ const Home = () => {
               <img src={recipe.image} alt={recipe.image}></img>
               <hr />
               <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
+              <button className="btn-primary" href="/editRecipe">Edit</button>
              </div>
              </div>
              </div>
