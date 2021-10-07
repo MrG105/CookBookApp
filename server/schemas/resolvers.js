@@ -30,8 +30,10 @@ const resolvers = {
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
     recipe: async (parent, args, context) => {
-      console.log('recipes:', args);
-      return Recipe.findOne({_id: ObjectId("615e4f57bed078bcb859ce3f") });
+      const url = context.rawHeaders[13].split('/').pop();
+
+      console.log('recipess:', url);
+      return Recipe.findOne({_id: url});
     }
   },
 
@@ -112,6 +114,7 @@ const resolvers = {
   //   )
   // },
   removeRecipe: async (parent, args, context) => {
+    console.log(args);
     const { recipeId } = args
     const recipe = await Recipe.findOneAndDelete({
       _id: recipeId,
@@ -127,9 +130,10 @@ const resolvers = {
   },
   
   editRecipe: async (parent, args, context) => {
-    console.log('edit', args, context.recipe)
-
-    return await Recipe.findOneAndUpdate(ObjectId("615e4f57bed078bcb859ce3f"), args.input, {new: true});
+    const url = context.rawHeaders[13].split('/').pop();
+    console.log('edit', url, args, context.user)
+    const recipeIdObject = ObjectId(url)
+    return await Recipe.findByIdAndUpdate(url, args.input, {new: true});
   }
   }
 };

@@ -63,6 +63,8 @@ const Home = () => {
       {recipes.length ? (
         <div className="flex-row justify-space-between mb-4 p-2">
           {recipes.map((recipe) => {
+            const recipeLink = "/EditRecipe/" + recipe._id
+            console.log(recipeLink.split('/'));
             return(
             <div key={recipe._id} border='dark' className="flex-row">
            <div className="card col-md-6"> 
@@ -74,7 +76,7 @@ const Home = () => {
               <img src={recipe.image} alt={recipe.image}></img>
               <hr />
               <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
-              <button className="btn-primary" href="/editRecipe">Edit</button>
+              <Link to={recipeLink} recipeId={recipe._id}>Edit</Link>
              </div>
              </div>
              </div>

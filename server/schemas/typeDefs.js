@@ -48,7 +48,7 @@ const typeDefs = gql`
 
     addRecipe(input: saveRecipe): Recipe
     removeRecipe(recipeId: String!):Recipe
-    editRecipe(input: editRecipe): Recipe
+    editRecipe(_id: ID, input: editRecipe): Recipe
 
   }
 `;
