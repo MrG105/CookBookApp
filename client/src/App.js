@@ -51,7 +51,7 @@ function App() {
           <Route exact path="/addRecipe">
             <RecipeForm />
           </Route>
-          <Route exact path="/editRecipe" component={EditRecipe}/>
+          <Route exact path="/editRecipe/:id" component={EditRecipe}/>
            
           <Route exact path="/editRecipe">
             <SingleRecipe />
