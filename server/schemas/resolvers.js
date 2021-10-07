@@ -61,7 +61,7 @@ const resolvers = {
       console.log('args', args)
       console.log('context', context.user)
     
-          // args.input.author = context.user.username          
+          args.input.author = context.user.username          
           const recipe = await Recipe.create({
             ...args.input
           }
