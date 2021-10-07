@@ -15,6 +15,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeList from "../components/RecipeList";
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";

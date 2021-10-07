@@ -8,9 +8,15 @@ import { QUERY_ME, QUERY_RECIPE } from "../utils/queries";
 
 
 const EditRecipe = () => {
-    const { loading, data } = useQuery(QUERY_ME);
-    const recipes = data?.me.savedRecipes || [];
-
+    const { loading, data } = useQuery(QUERY_RECIPE);
+    const [updateRecipe, setRecipeData] = useState({content: '', image: '', recipeName: ''});
+    console.log(data)
+    return (
+        <>
+        <section>
+            
+        </section>
+        </>
+    )
 }
-
 export default EditRecipe;
