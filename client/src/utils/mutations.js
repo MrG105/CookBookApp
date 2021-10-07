@@ -37,17 +37,10 @@ mutation addRecipe($input: saveRecipe) {
 `
 export const EDIT_RECIPE = gql`
 mutation editRecipe($input: editRecipe) {
-    editRecipe(input: $input) {
-        _id
-        username
-        email
-        savedRecipes {
-            _id
-            author
+    editRecipe(input: $input) {  
             content
             image
             recipeName
-        }
     }
 }
 `

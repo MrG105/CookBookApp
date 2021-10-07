@@ -39,7 +39,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     recipes(username: String): [Recipe]
-    recipe(_id: ID!): Recipe
+    recipe(_id: ID): Recipe
   }
 
   type Mutation {
@@ -48,7 +48,7 @@ const typeDefs = gql`
 
     addRecipe(input: saveRecipe): Recipe
     removeRecipe(recipeId: String!):Recipe
-    editRecipe(input: editRecipe): User
+    editRecipe(input: editRecipe): Recipe
 
   }
 `;

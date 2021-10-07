@@ -29,8 +29,8 @@ const resolvers = {
       return Recipe.find(params).sort({ createdAt: -1 }).toLean();
     },
     recipe: async (parent, args, context) => {
-      console.log('recipes:', args, context);
-      return Recipe.findOne({_id: ObjectId("615e42661da1df926c1b2e29") });
+      console.log('recipes:', args);
+      return Recipe.findOne({_id: ObjectId("615e4f57bed078bcb859ce3f") });
     }
   },
 
@@ -124,13 +124,9 @@ const resolvers = {
   },
   
   editRecipe: async (parent, args, context) => {
-    console.log('edit', args, context.user)
+    console.log('edit', args, context.recipe)
 
-    return await Recipe.findOneAndUpdate(
-      {_id: ObjectId("61596c822d38428d7123d5cb")}, 
-      {$pull: {id: args.recipeId}},
-      {new: true}
-      )
+    return await Recipe.findOneAndUpdate(ObjectId("615e4f57bed078bcb859ce3f"), args.input, {new: true});
   }
   }
 };
