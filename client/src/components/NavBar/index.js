@@ -14,11 +14,14 @@ function NavBar() {
           {Auth.loggedIn() ? (
             <>
               <li className="mx-2">
-                <Link to="/">My Recipes</Link>
+                <Link to="/">Home</Link>
               </li>
               <li className="mx-2">
-                <Link to="/recipeList">Recipe Search</Link>
+                <Link to="/profile">My Recipes</Link>
               </li>
+              {/* <li className="mx-2">
+                <Link to="/recipeList">Recipe Search</Link>
+              </li> */}
               <li className="mx-2">
                 <Link to="/addRecipe">Create New Recipe</Link>
               </li>

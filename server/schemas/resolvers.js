@@ -25,9 +25,9 @@ const resolvers = {
       return User.findOne({ username })
         .select('-__v -password')
     },
-    recipes: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Recipe.find(params).sort({ createdAt: -1 }).toLean();
+    recipes: async (parent, args, context) => {
+      
+      return Recipe.find();
     },
     recipe: async (parent, args, context) => {
       const url = context.rawHeaders[13].split('/').pop();
@@ -62,9 +62,9 @@ const resolvers = {
     },
     addRecipe: async (parent, args, context) => {
       console.log('args', args)
-      console.log('context', context.user)
+      console.log('context', context.user._id)
     
-          args.input.author = context.user.username          
+          // args.input.author = context.user.username          
           const recipe = await Recipe.create({
             ...args.input
           }

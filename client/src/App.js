@@ -3,9 +3,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@ap
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import SingleRecipe from "./pages/EditRecipe";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RecipeForm from "./components/RecipeForm";
@@ -51,11 +51,9 @@ function App() {
           <Route exact path="/addRecipe">
             <RecipeForm />
           </Route>
+          <Route exact path="/profile" component={Profile}/>
           <Route exact path="/editRecipe/:id" component={EditRecipe}/>
            
-          <Route exact path="/editRecipe">
-            <SingleRecipe />
-          </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>

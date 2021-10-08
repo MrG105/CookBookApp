@@ -1,16 +1,3 @@
-// import React from 'react';
-
-// const Home = () => {
-//     return (
-//         <div>Hello!</div>
-//     );
-// };
-
-// export default Home;
-
-// TODO
-// Add useEffect to reload on delete
-// use React-bootstrap stuff maybe
 
 import React, { useState, useEffect } from "react";
 import RecipeList from "../components/RecipeList";
@@ -18,41 +5,41 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_ME } from "../utils/queries";
-import { REMOVE_RECIPE } from "../utils/mutations";
+import { QUERY_RECIPES } from "../utils/queries";
 
-const Home = () => {
-  const { loading, data } = useQuery(QUERY_ME);
-  const recipes = data?.me.savedRecipes || [];
+
+const Profile = () => {
+  const { loading, data } = useQuery(QUERY_RECIPES);
+  const recipes = data?.recipes || [];
   console.log(recipes);
-  console.log(data);
+  // console.log("data", data.recipes);
   const loggedIn = Auth.loggedIn();
-  const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
+  // const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 
   useEffect(() => {
     if(recipes.length) {
-      const recipes = data?.me.savedRecipes || [];
+      const recipes = data?.recipes || [];
     }
   }, [recipes]);
 
-  const handleDeleteRecipe = async (recipeId) => {
+  // const handleDeleteRecipe = async (recipeId) => {
   
 
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-    // if(!token) {
-    //   console.log("this")
-    //   return false;
-    // }
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //   // if(!token) {
+  //   //   console.log("this")
+  //   //   return false;
+  //   // }
     
-    try {
-      const {data} = await removeRecipe({
-        variables: { recipeId: recipeId },
-      });
-      window.location.assign('/');
-    } catch(e) {
-      console.log(e);
-    }
-  }
+  //   try {
+  //     const {data} = await removeRecipe({
+  //       variables: { recipeId: recipeId },
+  //     });
+  //     window.location.assign('/');
+  //   } catch(e) {
+  //     console.log(e);
+  //   }
+  // }
   if (loading) {
     return <h1>loading</h1>
   }
@@ -75,8 +62,8 @@ const Home = () => {
               <p className="card-text">Author: <br /> {recipe.author}</p>
               <img src={recipe.image} alt={recipe.image}></img>
               <hr />
-              <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
-              <Link to={recipeLink} recipeId={recipe._id}>Edit</Link>
+              {/* <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
+              <Link to={recipeLink} recipeId={recipe._id}>Edit</Link> */}
              </div>
              </div>
              </div>
@@ -92,4 +79,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Profile;
