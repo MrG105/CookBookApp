@@ -78,19 +78,13 @@ const resolvers = {
           return recipe
       // throw new AuthenticationError('You need to be logged in!');
     },
-    // bookmark: async (parent, args, context) => {
-    //   console.log('args', args);
-    //   const recipe = await Recipe.findOne({_id: "615f97d50c9ace37cd37e33a"});
-    //   console.log('recipe', recipe);
-    //   return await User.findByIdAndUpdate(
-    //     { _id: '615fa2ba626437fb4227d80d' },
-    //     {$push: { bookmarked: {...recipe} } },
-    //     { new: true }
-    //   );
-  bookmark: async (parent, { recipe }, context) => {
+
+  bookmark: async (parent, args, context) => {
+    const recipeIdObject = ObjectId(args.recipeId)
+
     const bookmark = await User.findByIdAndUpdate(
       { _id: context.user._id },
-      { $push: { bookmarked: recipe }},                
+      { $push: { bookmarked: recipeIdObject}},                
       { new: true }
     ).populate('bookmarked');
     return bookmark;

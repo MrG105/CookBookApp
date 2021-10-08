@@ -6,15 +6,31 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_RECIPES } from "../utils/queries";
+import { BOOKMARK } from "../utils/mutations";
 
 
-const Profile = () => {
+
+const Home = () => {
   const { loading, data } = useQuery(QUERY_RECIPES);
+  const [bookmarkRecipe, {error}] = useMutation(BOOKMARK);
+
   const recipes = data?.recipes || [];
   console.log(recipes);
   // console.log("data", data.recipes);
   const loggedIn = Auth.loggedIn();
   // const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
+
+  const handleBookmarkRecipe = async (recipeId) => {
+    console.log(recipeId, 'bookmark')
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    try {
+      const {data} = await bookmarkRecipe({
+        // variables: { recipeId: recipeId },
+      });
+    } catch(e) {
+      console.log(e);
+    }
+  }
 
   useEffect(() => {
     if(recipes.length) {
@@ -45,13 +61,13 @@ const Profile = () => {
   }
   return (
     <div className="text-center">
-      <h1>Your Recipes</h1>
+      <h1>All Recipes</h1>
       <hr />
       {recipes.length ? (
         <div className="flex-row justify-space-between mb-4 p-2">
           {recipes.map((recipe) => {
             const recipeLink = "/EditRecipe/" + recipe._id
-            console.log(recipeLink.split('/'));
+            // console.log(recipeLink.split('/'));
             return(
             <div key={recipe._id} border='dark' className="flex-row">
            <div className="card col-md-6"> 
@@ -62,8 +78,8 @@ const Profile = () => {
               <p className="card-text">Author: <br /> {recipe.author}</p>
               <img src={recipe.image} alt={recipe.image}></img>
               <hr />
-              {/* <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
-              <Link to={recipeLink} recipeId={recipe._id}>Edit</Link> */}
+              <button className="btn-primary" onClick={() => handleBookmarkRecipe(recipe._id)}>Bookmark</button>
+              
 
              </div>
              </div>
@@ -80,4 +96,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Home;

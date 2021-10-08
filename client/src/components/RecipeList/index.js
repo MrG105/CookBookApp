@@ -8,26 +8,15 @@ import { QUERY_ME } from '../../utils/queries';
 
 import { useQuery, useMutation } from '@apollo/client';
 
-import { BOOKMARK } from '../../utils/mutations';
 
 
 const RecipeList = ({ recipes }) => {
-  const [bookmarkRecipe, {error}] = useMutation(BOOKMARK);
   if(!recipes.length) {
     return <h3>No Thoughts Yet</h3>;
   }
 
 
-  const handleBookmarkRecipe = async (recipeId) => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-    try {
-      const {data} = await bookmarkRecipe({
-        variables: { recipeId: recipeId },
-      });
-    } catch(e) {
-      console.log(e);
-    }
-  }
+  
 
   return(
     <>
@@ -53,7 +42,6 @@ const RecipeList = ({ recipes }) => {
                 <p className='small'>Authors: {recipe.author}</p>
 
                 <Card.Text></Card.Text>
-                <Button className="btn-primary" onClick={() => handleBookmarkRecipe(recipe._id)}>Bookmark</Button>
 
                 
               </Card.Body>
