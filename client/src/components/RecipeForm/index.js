@@ -74,11 +74,11 @@ function RecipeForm () {
           image: '',
           recipeName: ''
         });
-        window.location.assign('/');
+        window.location.assign('/profile');
         return data
       } catch (err) {
-        console.log('error', )
-        console.log(recipeFormData)
+        console.log('errore', err)
+        console.log(recipeFormData, "data", data)
       }
     
   }

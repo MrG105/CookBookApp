@@ -38,7 +38,7 @@ const EditRecipe = () => {
             image: '',
             recipeName: ''
           });
-          window.location.assign('/');
+          window.location.assign('/profile');
           return data
         } catch (err) {
           console.log('error', )

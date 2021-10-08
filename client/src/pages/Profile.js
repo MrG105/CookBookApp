@@ -1,41 +1,95 @@
-import React from 'react' 
-import RecipeList from '../components/RecipeList'
-import User from '../server/models/User'
-////NOTE MODELED AFTER MINI PROJ 14//
+// import React from 'react';
+
+// const Home = () => {
+//     return (
+//         <div>Hello!</div>
+//     );
+// };
+
+// export default Home;
+
+// TODO
+// Add useEffect to reload on delete
+// use React-bootstrap stuff maybe
+
+import React, { useState, useEffect } from "react";
+import RecipeList from "../components/RecipeList";
+import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+import { REMOVE_RECIPE } from "../utils/mutations";
+
 const Profile = () => {
-    return(
-<div>
+  const { loading, data } = useQuery(QUERY_ME);
+  const recipes = data?.me.savedRecipes || [];
+  console.log(recipes);
+  console.log(data);
+  const loggedIn = Auth.loggedIn();
+  const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 
-  <div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {User.username}!</h2>
-  </div>
-</div>
+  useEffect(() => {
+    if(recipes.length) {
+      const recipes = data?.me.savedRecipes || [];
+    }
+  }, [recipes]);
 
-<div class="row mt-4">
-  <div class="col-md-6">
-      <h2>{RecipeList}</h2>
-    <h3>Create a New Recipe:</h3>
-
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">Recipe name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
+  const handleDeleteRecipe = async (recipeId) => {
   
-      <div class="form-group">
-        <label for="project-desc">description of recipe:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
 
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // if(!token) {
+    //   console.log("this")
+    //   return false;
+    // }
+    
+    try {
+      const {data} = await removeRecipe({
+        variables: { recipeId: recipeId },
+      });
+      window.location.assign('/');
+    } catch(e) {
+      console.log(e);
+    }
+  }
+  if (loading) {
+    return <h1>loading</h1>
+  }
+  return (
+    <div className="text-center">
+      <h1>Your Recipes</h1>
+      <hr />
+      {recipes.length ? (
+        <div className="flex-row justify-space-between mb-4 p-2">
+          {recipes.map((recipe) => {
+            const recipeLink = "/EditRecipe/" + recipe._id
+            console.log(recipeLink.split('/'));
+            return(
+            <div key={recipe._id} border='dark' className="flex-row">
+           <div className="card col-md-6"> 
+             <div className="card-body">
+              <h5 className="card-title text-uppercase fw-bold">Recipe Name: <br /> {recipe.recipeName}</h5>
+              <hr />
+              <p className="card-text">How to make: <br /> {recipe.content}</p>
+              <p className="card-text">Author: <br /> {recipe.author}</p>
+              <img src={recipe.image} alt={recipe.image}></img>
+              <hr />
+              <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
+              <Link to={recipeLink} recipeId={recipe._id}>Edit</Link>
+             </div>
+             </div>
+             </div>
+             );
+})}
+        </div>
+  ) : (
+    <h3>You haven't added any products yet!</h3>
+      )}
+     
+    </div>
+    
+  );
+};
 
-
-</div>
-</div>
-)
-}
+export default Profile;

@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 
 export const QUERY_RECIPES = gql`
-query recipes($username: String) {
-    recipes(username: $username) {
-        _id
-        recipeText
-        username
+query QUERY_RECIPES {
+    recipes {
+       _id
+       author
+       content
+       image
+       recipeName
     }
 }
 `;
