@@ -64,6 +64,7 @@ const Profile = () => {
               <hr />
               {/* <button className="btn-primary" onClick={() => handleDeleteRecipe(recipe._id)}>Delete</button>
               <Link to={recipeLink} recipeId={recipe._id}>Edit</Link> */}
+
              </div>
              </div>
              </div>
