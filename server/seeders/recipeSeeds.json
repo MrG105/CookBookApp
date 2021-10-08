@@ -1,0 +1,65 @@
+[
+    {
+        "content": "Boil em, Mash em, Stick em in a stew.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633652064/cookbookapp/vh2virunh2daldhppjpx.jpg",
+        "recipeName": "PO-TAY-TOES",
+        "author":"Gabe"
+    },
+    {
+        "content": "Add Peanut Butter and Jelly, Serve Sliced.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633652311/cookbookapp/1920px-Peanut-Butter-Jelly-Sandwich_fxdsap.jpg",
+        "recipeName": "PB&J",
+        "author":"Zion"
+
+    },
+    {
+        "content": "Grill it Medium Well. Add as much bacon and cheese as desired. Serve in a Bun.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633572358/cookbookapp/oaqrzlymeohhchylkdyt.jpg",
+        "recipeName": "Billy's Bacon Cheeseburger",
+        "author":"Billy"
+
+    },
+    {
+        "content": "Pour Cookie Crisp cereal over Vanilla Ice Cream. Serve Chilled.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633574170/cookbookapp/u9jcd3neeiasdk4lbnmb.jpg",
+        "recipeName": "Cookie Crisp Ice Cream",
+        "author":"Gabe"
+
+    },
+    {
+        "content": "Grill dog until hot. Add condiments. Serve on bun.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633650707/cookbookapp/edzz8vbb3bnsspvomaif.jpg",
+        "recipeName": "Hot Doggies",
+        "author":"Alberto"
+
+    },
+    {
+        "content": "Scramble Eggs on Stove.  Grill & Chop Bacon.  Serve on Flour Tortilla.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633572373/cookbookapp/kpolisnqhus8wser8dm8.jpg",
+        "recipeName": "Breakfast Taco",
+        "author":"Zion"
+
+    },
+    {
+        "content": "Butter Bread, Grill Bot Sides Evenly.  Add Cheese and Press.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633652644/cookbookapp/x6k7ap0o7mcqnx84jotf.jpg",
+        "recipeName": "Grilled Cheese",
+        "author":"Billy"
+
+    },
+    {
+        "content": "Squeeze Tomatoes maybe... I'm gonna be honest, I'm not sure.",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633652778/cookbookapp/g8llpjwzswytaedonnei.jpg",
+        "recipeName": "Tomato Soup",
+        "author":"Alberto"
+
+    },
+    {
+        "content": "Pour Kool-Aid into Cup, Add Popsicle Stick.  Freeze overnight.  Serve Chilled",
+        "image": "https://res.cloudinary.com/dtopu3von/image/upload/v1633652851/cookbookapp/z4kzlkbk15audhu6al7s.jpg",
+        "recipeName": "Kool-Aid Pop",
+        "author":"Alberto"
+
+    }
+]
+
