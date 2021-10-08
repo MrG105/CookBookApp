@@ -25,6 +25,12 @@ const userSchema = new Schema ({
             ref: "Recipe"
           }
         ],
+        bookmarked: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: "Recipe"
+          }
+        ],
     },
 )
 

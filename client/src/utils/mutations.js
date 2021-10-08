@@ -35,6 +35,17 @@ mutation addRecipe($input: saveRecipe) {
     }
 }
 `
+export const BOOKMARK = gql`
+mutation bookmark($input: saveRecipe) {
+    bookmark(input: $input) {
+        _id
+        author
+        content
+        image
+        recipeName
+    }
+}
+`
 export const EDIT_RECIPE = gql`
 mutation editRecipe($input: editRecipe) {
     editRecipe(input: $input) {  
