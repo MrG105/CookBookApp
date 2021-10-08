@@ -64,7 +64,7 @@ const resolvers = {
       console.log('args', args)
       console.log('context', context.user._id)
     
-          // args.input.author = context.user.username          
+          args.input.author = context.user.username          
           const recipe = await Recipe.create({
             ...args.input
           }
@@ -78,18 +78,26 @@ const resolvers = {
           return recipe
       // throw new AuthenticationError('You need to be logged in!');
     },
-    bookmark: async (parent, args, context) => {
-      console.log('args', args);
-      const recipe = await Recipe.findOne({_id: "615f97d50c9ace37cd37e33a"});
-      console.log('recipe', recipe);
-      return await User.findByIdAndUpdate(
-        { _id: '615fa2ba626437fb4227d80d' },
-        {$push: { bookmarked: {...recipe} } },
-        { new: true }
-      );
+    // bookmark: async (parent, args, context) => {
+    //   console.log('args', args);
+    //   const recipe = await Recipe.findOne({_id: "615f97d50c9ace37cd37e33a"});
+    //   console.log('recipe', recipe);
+    //   return await User.findByIdAndUpdate(
+    //     { _id: '615fa2ba626437fb4227d80d' },
+    //     {$push: { bookmarked: {...recipe} } },
+    //     { new: true }
+    //   );
+  bookmark: async (parent, { recipe }, context) => {
+    const bookmark = await User.findByIdAndUpdate(
+      { _id: context.user._id },
+      { $push: { bookmarked: recipe }},                
+      { new: true }
+    ).populate('bookmarked');
+    return bookmark;
+  },
 
 
-    },
+    
   removeRecipe: async (parent, args, context) => {
     console.log(args);
     const { recipeId } = args
