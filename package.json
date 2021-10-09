@@ -19,10 +19,10 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "build": "react-scripts build",
+    "build": "cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "seed": "cd server && npm run seed"
