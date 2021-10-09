@@ -26,6 +26,7 @@ const Home = () => {
       const {data} = await bookmarkRecipe({
         variables: { recipeId: recipeId },
       });
+      window.location.assign('/Profile');
     } catch(e) {
       console.log(e);
     }
