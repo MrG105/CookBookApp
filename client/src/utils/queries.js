@@ -51,6 +51,13 @@ export const QUERY_ME = gql`
             image
             recipeName
         }
+        bookmarked {
+            _id
+            author
+            content
+            image
+            recipeName
+        }
     }
     }
 `;

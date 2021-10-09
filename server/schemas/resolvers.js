@@ -9,7 +9,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').select('-__v -password')
+        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').populate('bookmarked').select('-__v -password')
 
 
         return userData;
@@ -64,7 +64,7 @@ const resolvers = {
       console.log('args', args)
       console.log('context', context.user._id)
     
-          // args.input.author = context.user.username          
+          args.input.author = context.user.username          
           const recipe = await Recipe.create({
             ...args.input
           }
@@ -79,42 +79,23 @@ const resolvers = {
       // throw new AuthenticationError('You need to be logged in!');
     },
 
-    // addRecipe: async (parent, args, context) => {
+  bookmark: async (parent, args, context) => {
+    const recipeIdObject = ObjectId(args.recipeId)
+    console.log(recipeIdObject)
 
-    //   args.input.author = context.user.username
-    //   console.log(context.user);
-    //   console.log("args", args);
+    const bookmark = await User.findByIdAndUpdate(
+      { _id: context.user._id },
+      { $push: { bookmarked: recipeIdObject}},                
+      { new: true }
 
-
-    //   return User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       {
-    //           $push: {
-    //              savedRecipes: args.input
-    //           }
-    //       },
-    //       {
-    //           new: true,
-    //           runValidators: true,
-    //       }
-    //   );
-     
-  
+    ).populate('bookmarked')
+    .select('-__v -password');
+    return bookmark;
+  },
 
 
-  // removeRecipe: async (parent, args, context) => {
-  //   console.log('context', context);
-  //   console.log('args', args);
-  //   console.log('context user', context.user);
-  //   return User.findOneAndUpdate(
     
-  //     {_id: context.user._id},
-  //     {$pull: {savedRecipes: {_id: args.recipeId}}},
-  //     {new: true}
-  //   )
-  // },
   removeRecipe: async (parent, args, context) => {
-    console.log(args);
     const { recipeId } = args
     const recipe = await Recipe.findOneAndDelete({
       _id: recipeId,

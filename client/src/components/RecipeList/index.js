@@ -8,10 +8,15 @@ import { QUERY_ME } from '../../utils/queries';
 
 import { useQuery, useMutation } from '@apollo/client';
 
+
+
 const RecipeList = ({ recipes }) => {
   if(!recipes.length) {
     return <h3>No Thoughts Yet</h3>;
   }
+
+
+  
 
   return(
     <>
@@ -32,9 +37,12 @@ const RecipeList = ({ recipes }) => {
             <Card>
               {recipe.image ? <Card.Img src={recipe.image} alt={`The cover for ${recipe.recipeName}`} variant='top' /> : null}
               <Card.Body>
-                <Card.Title></Card.Title>
+                <Card.Title>
+                </Card.Title>
                 <p className='small'>Authors: {recipe.author}</p>
+
                 <Card.Text></Card.Text>
+
                 
               </Card.Body>
             </Card>
