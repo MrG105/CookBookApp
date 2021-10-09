@@ -89,7 +89,8 @@ const Profile = () => {
                     >
                       Delete
                     </button>
-                    <Link to={recipeLink} recipeId={recipe._id}>
+                    <br />
+                    <Link className="btn-primary" to={recipeLink} recipeId={recipe._id}>
                       Edit
                     </Link>
                   </div>
