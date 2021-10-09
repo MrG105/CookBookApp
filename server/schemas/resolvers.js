@@ -9,7 +9,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').select('-__v -password')
+        const userData = await User.findOne({ _id: context.user._id }).populate('savedRecipes').populate('bookmarked').select('-__v -password')
 
 
         return userData;
@@ -81,19 +81,21 @@ const resolvers = {
 
   bookmark: async (parent, args, context) => {
     const recipeIdObject = ObjectId(args.recipeId)
+    console.log(recipeIdObject)
 
     const bookmark = await User.findByIdAndUpdate(
       { _id: context.user._id },
       { $push: { bookmarked: recipeIdObject}},                
       { new: true }
-    ).populate('bookmarked');
+
+    ).populate('bookmarked')
+    .select('-__v -password');
     return bookmark;
   },
 
 
     
   removeRecipe: async (parent, args, context) => {
-    console.log(args);
     const { recipeId } = args
     const recipe = await Recipe.findOneAndDelete({
       _id: recipeId,

@@ -18,14 +18,13 @@ const Home = () => {
   console.log(recipes);
   // console.log("data", data.recipes);
   const loggedIn = Auth.loggedIn();
-  // const [removeRecipe, {error}] = useMutation(REMOVE_RECIPE);
 
   const handleBookmarkRecipe = async (recipeId) => {
     console.log(recipeId, 'bookmark')
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     try {
       const {data} = await bookmarkRecipe({
-        // variables: { recipeId: recipeId },
+        variables: { recipeId: recipeId },
       });
     } catch(e) {
       console.log(e);

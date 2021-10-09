@@ -36,13 +36,11 @@ mutation addRecipe($input: saveRecipe) {
 }
 `
 export const BOOKMARK = gql`
-mutation bookmark($input: saveRecipe) {
-    bookmark(input: $input) {
-        _id
-        author
-        content
-        image
-        recipeName
+mutation bookmark($recipeId: String!) {
+    bookmark(recipeId: $recipeId) {
+        bookmarked {
+            _id
+        }
     }
 }
 `
